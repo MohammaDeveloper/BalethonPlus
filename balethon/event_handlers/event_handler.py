@@ -44,8 +44,7 @@ class EventHandler:
         if iscoroutinefunction(self.callback):
             return await self.callback(*args, **kwargs)
         return client.dispatcher.event_loop.run_in_executor(
-            client.dispatcher.sync_workers,
-            partial(self.callback, *args, **kwargs)
+            client.dispatcher.sync_workers, partial(self.callback, *args, **kwargs)
         )
 
     def __call__(self, *args, **kwargs):

@@ -2,7 +2,9 @@ from balethon.objects import User, unwrap
 
 
 def main():
-    user = User(id=1234, username="@username", first_name="first_name", last_name="last_name")
+    user = User(
+        id=1234, username="@username", first_name="first_name", last_name="last_name"
+    )
     print(user)
 
     print(unwrap(user))

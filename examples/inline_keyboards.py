@@ -8,11 +8,7 @@ bot = Client("TOKEN")
 @bot.on_message(private)
 async def answer_message(message):
     await message.reply(
-        "Click a button!",
-        InlineKeyboard(
-            [("Button 1", "1")],
-            [("Button 2", "2")]
-        )
+        "Click a button!", InlineKeyboard([("Button 1", "1")], [("Button 2", "2")])
     )
 
 

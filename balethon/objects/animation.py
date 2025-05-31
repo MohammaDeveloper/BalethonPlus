@@ -6,20 +6,20 @@ class Animation(Object):
         ("id", "file_id"),
         ("unique_id", "file_unique_id"),
         ("name", "file_name"),
-        ("size", "file_size")
+        ("size", "file_size"),
     ]
 
     def __init__(
-            self,
-            id: str = None,
-            unique_id: str = None,
-            width: int = None,
-            height: int = None,
-            duration: int = None,
-            name: str = None,
-            mime_type: str = None,
-            size: int = None,
-            **kwargs
+        self,
+        id: str = None,
+        unique_id: str = None,
+        width: int = None,
+        height: int = None,
+        duration: int = None,
+        name: str = None,
+        mime_type: str = None,
+        size: int = None,
+        **kwargs,
     ):
         self.id: str = id
         self.unique_id: str = unique_id

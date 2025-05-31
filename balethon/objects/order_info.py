@@ -3,14 +3,13 @@ from balethon import objects
 
 
 class OrderInfo(Object):
-
     def __init__(
-            self,
-            name: str = None,
-            phone_number: str = None,
-            email: str = None,
-            shipping_address: "objects.ShippingAddress" = None,
-            **kwargs
+        self,
+        name: str = None,
+        phone_number: str = None,
+        email: str = None,
+        shipping_address: "objects.ShippingAddress" = None,
+        **kwargs,
     ):
         super().__init__(**kwargs)
         self.name: str = name

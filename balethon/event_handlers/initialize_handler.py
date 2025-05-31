@@ -4,7 +4,6 @@ from .event_handler import EventHandler
 
 
 class InitializeHandler(EventHandler):
-
     @property
     def can_handle(self):
         return InitializeHandler

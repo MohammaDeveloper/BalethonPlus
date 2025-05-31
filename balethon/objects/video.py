@@ -3,21 +3,18 @@ from balethon import objects
 
 
 class Video(Object):
-    attribute_names = [
-        ("id", "file_id"),
-        ("size", "file_size")
-    ]
+    attribute_names = [("id", "file_id"), ("size", "file_size")]
 
     def __init__(
-            self,
-            id: str = None,
-            width: int = None,
-            height: int = None,
-            duration: int = None,
-            thumb: "objects.Photo" = None,
-            mime_type: str = None,
-            size: int = None,
-            **kwargs
+        self,
+        id: str = None,
+        width: int = None,
+        height: int = None,
+        duration: int = None,
+        thumb: "objects.Photo" = None,
+        mime_type: str = None,
+        size: int = None,
+        **kwargs,
     ):
         super().__init__(**kwargs)
         self.id: str = id

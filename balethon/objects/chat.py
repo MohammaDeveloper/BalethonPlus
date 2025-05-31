@@ -7,23 +7,22 @@ from ..sync_support import add_sync_support_to_object
 
 @add_sync_support_to_object
 class Chat(Object):
-
     def __init__(
-            self,
-            id: int = None,
-            type: str = None,
-            title: str = None,
-            username: str = None,
-            first_name: str = None,
-            last_name: str = None,
-            all_members_are_administrators: bool = None,
-            description: str = None,
-            invite_link: str = None,
-            pinned_message: "objects.Message" = None,
-            sticker_set_name: str = None,
-            can_set_sticker_set: bool = None,
-            photo: "objects.ChatPhoto" = None,
-            **kwargs
+        self,
+        id: int = None,
+        type: str = None,
+        title: str = None,
+        username: str = None,
+        first_name: str = None,
+        last_name: str = None,
+        all_members_are_administrators: bool = None,
+        description: str = None,
+        invite_link: str = None,
+        pinned_message: "objects.Message" = None,
+        sticker_set_name: str = None,
+        can_set_sticker_set: bool = None,
+        photo: "objects.ChatPhoto" = None,
+        **kwargs,
     ):
         super().__init__(**kwargs)
         self.id: int = id

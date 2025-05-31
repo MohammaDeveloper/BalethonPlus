@@ -2,15 +2,14 @@ from . import Object
 
 
 class Invoice(Object):
-
     def __init__(
-            self,
-            title: str = None,
-            description: str = None,
-            start_parameter: str = None,
-            currency: str = None,
-            total_amount: int = None,
-            **kwargs
+        self,
+        title: str = None,
+        description: str = None,
+        start_parameter: str = None,
+        currency: str = None,
+        total_amount: int = None,
+        **kwargs,
     ):
         super().__init__(**kwargs)
         self.title: str = title

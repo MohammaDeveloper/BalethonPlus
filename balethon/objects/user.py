@@ -7,16 +7,15 @@ from ..sync_support import add_sync_support_to_object
 
 @add_sync_support_to_object
 class User(Object):
-
     def __init__(
-            self,
-            id: int = None,
-            username: str = None,
-            first_name: str = None,
-            last_name: str = None,
-            language_code: str = None,
-            is_bot: bool = None,
-            **kwargs
+        self,
+        id: int = None,
+        username: str = None,
+        first_name: str = None,
+        last_name: str = None,
+        language_code: str = None,
+        is_bot: bool = None,
+        **kwargs,
     ):
         super().__init__(**kwargs)
         self.id: int = id

@@ -21,9 +21,14 @@ class Object:
             if value is None:
                 continue
             expected_type = expected_types[key]
-            if isinstance(expected_type, (type(Union), type(Union[str, int]))) and get_origin(expected_type) in (Union, None):
+            if isinstance(
+                expected_type, (type(Union), type(Union[str, int]))
+            ) and get_origin(expected_type) in (Union, None):
                 expected_type = get_args(expected_type)[0]
-            if isinstance(expected_type, (type(List), type(List[str]))) and get_origin(expected_type) == list:
+            if (
+                isinstance(expected_type, (type(List), type(List[str])))
+                and get_origin(expected_type) == list
+            ):
                 if isinstance(value, list):
                     raw_object[key] = wrap(expected_type, value)
                 continue
@@ -54,10 +59,7 @@ class Object:
             if isinstance(value, Object):
                 value.bind(client)
 
-    def __init__(
-            self,
-            **kwargs
-    ):
+    def __init__(self, **kwargs):
         self.client: Optional["balethon.Client"] = None
         for key, value in kwargs.items():
             self[key] = value
@@ -91,20 +93,26 @@ class Object:
         attributes = [f"{key}={repr(value)}," for key, value in attributes.items()]
         attributes = "\n".join(attributes)
         if attributes:
-            attributes = "\n".join(" "*4 + line for line in attributes.splitlines())
+            attributes = "\n".join(" " * 4 + line for line in attributes.splitlines())
             attributes = f"\n{attributes}\n"
         return f"{type(self).__name__}({attributes})"
 
 
 def wrap(expected_type, raw_object):
-    if isinstance(expected_type, (type(List), type(List[str]))) and get_origin(expected_type) == list:
+    if (
+        isinstance(expected_type, (type(List), type(List[str])))
+        and get_origin(expected_type) == list
+    ):
         if isinstance(raw_object, list):
             expected_type = get_args(expected_type)[0]
             raw_object = copy(raw_object)
             for i, element in enumerate(raw_object):
                 if element is None:
                     continue
-                if isinstance(expected_type, (type(List), type(List[str]))) and get_origin(expected_type) == list:
+                if (
+                    isinstance(expected_type, (type(List), type(List[str])))
+                    and get_origin(expected_type) == list
+                ):
                     if isinstance(element, list):
                         raw_object[i] = wrap(expected_type, element)
                     continue
@@ -114,6 +122,7 @@ def wrap(expected_type, raw_object):
                     continue
                 raw_object[i] = expected_type.wrap(element)
             from .list import List as BalethonList
+
             return BalethonList(raw_object)
 
     if issubclass(expected_type, Object):

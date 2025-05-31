@@ -6,9 +6,7 @@ bot = Client("TOKEN")
 
 @bot.on_command(private)
 async def start(*, message):
-    await message.reply(
-        "Hello, I'm the commands bot\nUse /help to see my commands"
-    )
+    await message.reply("Hello, I'm the commands bot\nUse /help to see my commands")
 
 
 @bot.on_command(private, name="help")
@@ -23,9 +21,7 @@ async def say_hello(*, message):
 
 @bot.on_command(private)
 async def count_to_ten(*, message):
-    counting_message = await message.reply(
-        "I will start to count to ten now"
-    )
+    counting_message = await message.reply("I will start to count to ten now")
     for i in range(1, 11):
         await counting_message.edit_text(str(i))
 

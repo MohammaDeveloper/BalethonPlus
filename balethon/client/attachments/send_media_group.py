@@ -8,13 +8,12 @@ from balethon import objects
 
 
 class SendMediaGroup:
-
     async def send_media_group(
-            self: "balethon.Client",
-            chat_id: Union[int, str],
-            media: List["objects.InputMedia"],
-            reply_markup: ReplyMarkup = None,
-            reply_to_message_id: int = None
+        self: "balethon.Client",
+        chat_id: Union[int, str],
+        media: List["objects.InputMedia"],
+        reply_markup: ReplyMarkup = None,
+        reply_to_message_id: int = None,
     ) -> List[Message]:
         chat_id = await self.resolve_peer_id(chat_id)
         data = locals()

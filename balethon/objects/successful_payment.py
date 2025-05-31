@@ -3,17 +3,16 @@ from balethon import objects
 
 
 class SuccessfulPayment(Object):
-
     def __init__(
-            self,
-            currency: str = None,
-            total_amount: int = None,
-            invoice_payload: str = None,
-            shipping_option_id: str = None,
-            order_info: "objects.OrderInfo" = None,
-            telegram_payment_charge_id: str = None,
-            provider_payment_charge_id: str = None,
-            **kwargs
+        self,
+        currency: str = None,
+        total_amount: int = None,
+        invoice_payload: str = None,
+        shipping_option_id: str = None,
+        order_info: "objects.OrderInfo" = None,
+        telegram_payment_charge_id: str = None,
+        provider_payment_charge_id: str = None,
+        **kwargs,
     ):
         super().__init__(**kwargs)
         self.currency: str = currency

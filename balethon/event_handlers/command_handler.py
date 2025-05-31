@@ -22,7 +22,15 @@ class CommandHandler(MessageHandler):
             return None
         return len(args)
 
-    def __init__(self, callback, condition=None, name=None, prefix="/", min_arguments=None, max_arguments=None):
+    def __init__(
+        self,
+        callback,
+        condition=None,
+        name=None,
+        prefix="/",
+        min_arguments=None,
+        max_arguments=None,
+    ):
         if name is None:
             name = callback.__name__
         if min_arguments is None:

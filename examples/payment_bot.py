@@ -22,7 +22,7 @@ async def send_invoice(client, message):
         description="Some description",
         payload=str(message.author.id),
         provider_token=PROVIDER_TOKEN,
-        prices=[LabeledPrice(label="Some label", amount=1000000)]
+        prices=[LabeledPrice(label="Some label", amount=1000000)],
     )
 
 

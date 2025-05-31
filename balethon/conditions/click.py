@@ -13,6 +13,8 @@ class Click(Condition):
         if isinstance(self.keyboard, ReplyKeyboard) and isinstance(event, Message):
             button = self.keyboard.keyboard[self.row_index][self.button_index]
             return event.text == button.text
-        elif isinstance(self.keyboard, InlineKeyboard) and isinstance(event, CallbackQuery):
+        elif isinstance(self.keyboard, InlineKeyboard) and isinstance(
+            event, CallbackQuery
+        ):
             button = self.keyboard.inline_keyboard[self.row_index][self.button_index]
             return event.data == button.callback_data

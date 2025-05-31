@@ -76,7 +76,9 @@ class NotCondition(Condition):
 
 def create(name: str = None, can_process=None):
     def decorator(function):
-        CustomCondition = type(name or function.__name__ or "CustomCondition", (Condition,), {})
+        CustomCondition = type(
+            name or function.__name__ or "CustomCondition", (Condition,), {}
+        )
         return CustomCondition(function, can_process)
 
     return decorator

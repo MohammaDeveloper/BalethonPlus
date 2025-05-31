@@ -7,13 +7,11 @@ from ...enums import ChatType
 
 
 class GetChat:
-
-    async def get_chat(
-            self: "balethon.Client",
-            chat_id: Union[int, str]
-    ) -> Chat:
+    async def get_chat(self: "balethon.Client", chat_id: Union[int, str]) -> Chat:
         # 1234567890 | "1234567890"
-        if isinstance(chat_id, int) or (isinstance(chat_id, str) and chat_id.isnumeric()):
+        if isinstance(chat_id, int) or (
+            isinstance(chat_id, str) and chat_id.isnumeric()
+        ):
             return await self.auto_execute("get", "getChat", locals())
 
         # "@username"
@@ -43,7 +41,9 @@ class GetChat:
         info = info["props"]["pageProps"]
 
         if info["peer"]["type"] == 0:
-            raise RPCError.create(code=404, description="no such group or user", reason="getChat")
+            raise RPCError.create(
+                code=404, description="no such group or user", reason="getChat"
+            )
 
         elif info["peer"]["type"] == 1:
             result.type = ChatType.PRIVATE
@@ -52,8 +52,12 @@ class GetChat:
             result.description = info["user"]["description"]
 
         elif info["peer"]["type"] == 2:
-            result.type = ChatType.CHANNEL if info["group"]["isChannel"] else ChatType.GROUP
-            result.username = info["group"]["nick"] if info["group"].get("nick") else None
+            result.type = (
+                ChatType.CHANNEL if info["group"]["isChannel"] else ChatType.GROUP
+            )
+            result.username = (
+                info["group"]["nick"] if info["group"].get("nick") else None
+            )
             result.title = info["group"]["title"]
             result.description = info["group"]["description"]
 

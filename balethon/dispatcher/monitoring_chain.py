@@ -16,4 +16,6 @@ class MonitoringChain(Chain):
 
     @Chain.callback_query_handler()
     def monitor_callback_query(self, callback_query):
-        self.stream.write(f"{callback_query.author.full_name}: [{callback_query.data}]\n")
+        self.stream.write(
+            f"{callback_query.author.full_name}: [{callback_query.data}]\n"
+        )

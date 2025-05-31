@@ -1,5 +1,11 @@
 from functools import wraps
-from asyncio import get_event_loop, new_event_loop, set_event_loop, wrap_future, run_coroutine_threadsafe
+from asyncio import (
+    get_event_loop,
+    new_event_loop,
+    set_event_loop,
+    wrap_future,
+    run_coroutine_threadsafe,
+)
 from inspect import iscoroutinefunction
 from threading import current_thread, main_thread
 from typing import Callable
@@ -21,8 +27,10 @@ def add_sync_support_to_function(coroutine_function) -> Callable:
                 return coroutine
             return loop.run_until_complete(coroutine)
         if loop.is_running():
+
             async def coroutine_wrapper():
                 return await wrap_future(run_coroutine_threadsafe(coroutine, main_loop))
+
             return coroutine_wrapper()
         return run_coroutine_threadsafe(coroutine, main_loop).result()
 

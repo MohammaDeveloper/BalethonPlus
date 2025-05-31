@@ -18,6 +18,6 @@ class List(list, Object):
     def __repr__(self):
         elements = "\n".join(f"{repr(element)}," for element in self)
         if elements:
-            elements = "\n".join(" "*4 + line for line in elements.splitlines())
+            elements = "\n".join(" " * 4 + line for line in elements.splitlines())
             elements = f"\n{elements}\n"
         return f"[{elements}]"

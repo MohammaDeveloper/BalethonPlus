@@ -10,6 +10,7 @@ VIDEO_URL = "https://dev.bale.ai/sites/default/files/1398-03/final_5ce505a96467b
 AUDIO = "https://vgmsite.com/soundtracks/minecraft/abtibsbmth/1-07.%20Haggstrom.mp3"
 MESSAGE_ID = None
 
+
 async def test_message_methods(client):
     message = await client.send_message(CHAT_ID, "send_message")
     print(f"send_message: {message}")
@@ -84,7 +85,9 @@ async def test_attachment_methods(client):
     response = await client.send_location(CHAT_ID, latitude=10, longitude=10)
     print(f"send_location: {response}")
 
-    response = await client.send_contact(chat_id=CHAT_ID, phone_number="09909090999", first_name="name")
+    response = await client.send_contact(
+        chat_id=CHAT_ID, phone_number="09909090999", first_name="name"
+    )
     print(f"send_contact: {response}")
 
     # response = await client.send_animation(CHAT_ID, VIDEO_URL)
@@ -160,7 +163,7 @@ async def test_payment_methods(client):
         description="Test",
         payload="Test",
         provider_token="Test",
-        prices="0"
+        prices="0",
     )
     print(f"send_invoice: {response}")
 

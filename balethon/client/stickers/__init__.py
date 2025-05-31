@@ -5,5 +5,11 @@ from .upload_sticker_file import UploadStickerFile
 from .add_sticker_to_set import AddStickerToSet
 
 
-class Stickers(GetStickerSet, CreateNewStickerSet, DeleteStickerFromSet, UploadStickerFile, AddStickerToSet):
+class Stickers(
+    GetStickerSet,
+    CreateNewStickerSet,
+    DeleteStickerFromSet,
+    UploadStickerFile,
+    AddStickerToSet,
+):
     pass

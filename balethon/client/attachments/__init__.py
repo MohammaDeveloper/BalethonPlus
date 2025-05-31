@@ -22,6 +22,6 @@ class Attachments(
     SendLocation,
     SendContact,
     SendMediaGroup,
-    GetFile
+    GetFile,
 ):
     pass

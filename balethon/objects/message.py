@@ -8,63 +8,64 @@ from ..sync_support import add_sync_support_to_object
 
 @add_sync_support_to_object
 class Message(Object):
-    attribute_names = [
-        ("id", "message_id"),
-        ("author", "from")
-    ]
+    attribute_names = [("id", "message_id"), ("author", "from")]
 
     @classmethod
     def wrap(cls, raw_object):
         try:
-            if not raw_object.get("voice") and raw_object["document"]["mime_type"].startswith("audio"):
+            if not raw_object.get("voice") and raw_object["document"][
+                "mime_type"
+            ].startswith("audio"):
                 raw_object["audio"] = raw_object["document"]
         except (TypeError, KeyError):
             pass
         try:
-            if not raw_object.get("video") and raw_object["document"]["mime_type"].startswith("video"):
+            if not raw_object.get("video") and raw_object["document"][
+                "mime_type"
+            ].startswith("video"):
                 raw_object["animation"] = raw_object["document"]
         except (TypeError, KeyError):
             pass
         return super().wrap(raw_object)
 
     def __init__(
-            self,
-            id: int = None,
-            author: "objects.User" = None,
-            date: "objects.Date" = None,
-            chat: "objects.Chat" = None,
-            forward_from: "objects.User" = None,
-            forward_from_chat: "objects.Chat" = None,
-            forward_from_message_id: int = None,
-            forward_date: "objects.Date" = None,
-            reply_to_message: "objects.Message" = None,
-            edit_date: "objects.Date" = None,
-            text: str = None,
-            animation: "objects.Animation" = None,
-            entities: List["objects.Entity"] = None,
-            caption_entities: List["objects.Entity"] = None,
-            voice: "objects.Voice" = None,
-            audio: "objects.Audio" = None,
-            document: "objects.Document" = None,
-            photo: List["objects.Photo"] = None,
-            video: "objects.Video" = None,
-            sticker: "objects.Sticker" = None,
-            caption: str = None,
-            contact: "objects.Contact" = None,
-            location: "objects.Location" = None,
-            new_chat_members: List["objects.User"] = None,
-            left_chat_member: "objects.User" = None,
-            new_chat_title: str = None,
-            new_chat_photo: List["objects.Photo"] = None,
-            delete_chat_photo: bool = None,
-            group_chat_created: bool = None,
-            supergroup_chat_created: bool = None,
-            channel_chat_created: bool = None,
-            pinned_message: None = None,
-            invoice: "objects.Invoice" = None,
-            successful_payment: "objects.SuccessfulPayment" = None,
-            media_group_id: int = None,
-            **kwargs
+        self,
+        id: int = None,
+        author: "objects.User" = None,
+        date: "objects.Date" = None,
+        chat: "objects.Chat" = None,
+        forward_from: "objects.User" = None,
+        forward_from_chat: "objects.Chat" = None,
+        forward_from_message_id: int = None,
+        forward_date: "objects.Date" = None,
+        reply_to_message: "objects.Message" = None,
+        edit_date: "objects.Date" = None,
+        text: str = None,
+        animation: "objects.Animation" = None,
+        entities: List["objects.Entity"] = None,
+        caption_entities: List["objects.Entity"] = None,
+        voice: "objects.Voice" = None,
+        audio: "objects.Audio" = None,
+        document: "objects.Document" = None,
+        photo: List["objects.Photo"] = None,
+        video: "objects.Video" = None,
+        sticker: "objects.Sticker" = None,
+        caption: str = None,
+        contact: "objects.Contact" = None,
+        location: "objects.Location" = None,
+        new_chat_members: List["objects.User"] = None,
+        left_chat_member: "objects.User" = None,
+        new_chat_title: str = None,
+        new_chat_photo: List["objects.Photo"] = None,
+        delete_chat_photo: bool = None,
+        group_chat_created: bool = None,
+        supergroup_chat_created: bool = None,
+        channel_chat_created: bool = None,
+        pinned_message: None = None,
+        invoice: "objects.Invoice" = None,
+        successful_payment: "objects.SuccessfulPayment" = None,
+        media_group_id: int = None,
+        **kwargs,
     ):
         super().__init__(**kwargs)
         self.id: int = id
@@ -103,7 +104,6 @@ class Message(Object):
         self.successful_payment: "objects.SuccessfulPayment" = successful_payment
         self.media_group_id: int = media_group_id
 
-
     @property
     def media_type(self):
         for media_type in MessageMediaType:
@@ -122,13 +122,13 @@ class Message(Object):
             self.text = value
 
     async def reply_animation(
-            self,
-            animation: Union[str, bytes, BinaryIO, "objects.InputMedia"],
-            duration: int = None,
-            width: int = None,
-            height: int = None,
-            caption: str = None,
-            reply_markup: "objects.ReplyMarkup" = None
+        self,
+        animation: Union[str, bytes, BinaryIO, "objects.InputMedia"],
+        duration: int = None,
+        width: int = None,
+        height: int = None,
+        caption: str = None,
+        reply_markup: "objects.ReplyMarkup" = None,
     ):
         return await self.client.send_animation(
             self.chat.id,
@@ -138,152 +138,138 @@ class Message(Object):
             height,
             caption,
             reply_markup,
-            self.id
+            self.id,
         )
 
     async def reply_audio(
-            self,
-            audio: Union[str, bytes, BinaryIO, "objects.InputMedia"],
-            caption: str = None,
-            duration: int = None,
-            title: str = None,
-            reply_markup: "objects.ReplyMarkup" = None
+        self,
+        audio: Union[str, bytes, BinaryIO, "objects.InputMedia"],
+        caption: str = None,
+        duration: int = None,
+        title: str = None,
+        reply_markup: "objects.ReplyMarkup" = None,
     ):
-        return await self.client.send_audio(self.chat.id, audio, caption, duration, title, reply_markup, self.id)
+        return await self.client.send_audio(
+            self.chat.id, audio, caption, duration, title, reply_markup, self.id
+        )
 
     async def reply_contact(
-            self,
-            phone_number: str,
-            first_name: str,
-            last_name: str = None,
-            reply_markup: "objects.ReplyMarkup" = None
+        self,
+        phone_number: str,
+        first_name: str,
+        last_name: str = None,
+        reply_markup: "objects.ReplyMarkup" = None,
     ):
-        return await self.client.send_contact(self.chat.id, phone_number, first_name, last_name, reply_markup, self.id)
+        return await self.client.send_contact(
+            self.chat.id, phone_number, first_name, last_name, reply_markup, self.id
+        )
 
     async def reply_document(
-            self,
-            document: Union[str, bytes, BinaryIO, "objects.InputMedia"],
-            caption: str = None,
-            reply_markup: "objects.ReplyMarkup" = None
+        self,
+        document: Union[str, bytes, BinaryIO, "objects.InputMedia"],
+        caption: str = None,
+        reply_markup: "objects.ReplyMarkup" = None,
     ):
-        return await self.client.send_document(self.chat.id, document, caption, reply_markup, self.id)
+        return await self.client.send_document(
+            self.chat.id, document, caption, reply_markup, self.id
+        )
 
     async def reply_location(
-            self,
-            latitude: int,
-            longitude: int,
-            reply_markup: "objects.ReplyMarkup" = None
+        self, latitude: int, longitude: int, reply_markup: "objects.ReplyMarkup" = None
     ):
-        return await self.client.send_location(self.chat.id, longitude, latitude, reply_markup, self.id)
+        return await self.client.send_location(
+            self.chat.id, longitude, latitude, reply_markup, self.id
+        )
 
-    async def reply_media_group(
-            self,
-            media: List["objects.InputMedia"]
-    ):
+    async def reply_media_group(self, media: List["objects.InputMedia"]):
         return await self.client.send_media_group(self.chat.id, media)
 
     async def reply_photo(
-            self,
-            photo: Union[str, bytes, BinaryIO, "objects.InputMedia"],
-            caption: str = None,
-            reply_markup: "objects.ReplyMarkup" = None
+        self,
+        photo: Union[str, bytes, BinaryIO, "objects.InputMedia"],
+        caption: str = None,
+        reply_markup: "objects.ReplyMarkup" = None,
     ):
-        return await self.client.send_photo(self.chat.id, photo, caption, reply_markup, self.id)
+        return await self.client.send_photo(
+            self.chat.id, photo, caption, reply_markup, self.id
+        )
 
     async def reply_sticker(
-            self,
-            sticker: Union[str, bytes, BinaryIO, "objects.InputMedia"],
-            reply_markup: "objects.ReplyMarkup" = None
+        self,
+        sticker: Union[str, bytes, BinaryIO, "objects.InputMedia"],
+        reply_markup: "objects.ReplyMarkup" = None,
     ):
-        return await self.client.send_sticker(self.chat.id, sticker, reply_markup, self.id)
+        return await self.client.send_sticker(
+            self.chat.id, sticker, reply_markup, self.id
+        )
 
     async def reply_video(
-            self,
-            video: Union[str, bytes, BinaryIO, "objects.InputMedia"],
-            duration: int = None,
-            width: int = None,
-            height: int = None,
-            caption: str = None,
-            reply_markup: "objects.ReplyMarkup" = None
+        self,
+        video: Union[str, bytes, BinaryIO, "objects.InputMedia"],
+        duration: int = None,
+        width: int = None,
+        height: int = None,
+        caption: str = None,
+        reply_markup: "objects.ReplyMarkup" = None,
     ):
-        return await self.client.send_video(self.chat.id, video, duration, width, height, caption, reply_markup)
+        return await self.client.send_video(
+            self.chat.id, video, duration, width, height, caption, reply_markup
+        )
 
     async def reply_voice(
-            self,
-            voice: Union[str, bytes, BinaryIO, "objects.InputMedia"],
-            caption: str = None,
-            duration: int = None,
-            reply_markup: "objects.ReplyMarkup" = None
+        self,
+        voice: Union[str, bytes, BinaryIO, "objects.InputMedia"],
+        caption: str = None,
+        duration: int = None,
+        reply_markup: "objects.ReplyMarkup" = None,
     ):
-        return await self.client.send_voice(self.chat.id, voice, caption, duration, reply_markup, self.id)
+        return await self.client.send_voice(
+            self.chat.id, voice, caption, duration, reply_markup, self.id
+        )
 
-    async def reply(
-            self,
-            text: str,
-            reply_markup: "objects.ReplyMarkup" = None
-    ):
+    async def reply(self, text: str, reply_markup: "objects.ReplyMarkup" = None):
         return await self.client.send_message(self.chat.id, text, reply_markup, self.id)
 
-    async def edit_text(
-            self,
-            text: str,
-            reply_markup: "objects.ReplyMarkup" = None
-    ):
-        return await self.client.edit_message_text(self.chat.id, self.id, text, reply_markup)
+    async def edit_text(self, text: str, reply_markup: "objects.ReplyMarkup" = None):
+        return await self.client.edit_message_text(
+            self.chat.id, self.id, text, reply_markup
+        )
 
     async def edit_caption(
-            self,
-            caption: str,
-            reply_markup: "objects.ReplyMarkup" = None
+        self, caption: str, reply_markup: "objects.ReplyMarkup" = None
     ):
-        return await self.client.edit_message_caption(self.chat.id, self.id, caption, reply_markup)
+        return await self.client.edit_message_caption(
+            self.chat.id, self.id, caption, reply_markup
+        )
 
-    async def edit(
-            self,
-            text: str,
-            reply_markup: "objects.ReplyMarkup" = None
-    ):
+    async def edit(self, text: str, reply_markup: "objects.ReplyMarkup" = None):
         if self.text:
             return await self.edit_text(text, reply_markup)
         return await self.edit_caption(text, reply_markup)
 
-    async def edit_reply_markup(
-            self,
-            reply_markup: "objects.ReplyMarkup" = None
-    ):
+    async def edit_reply_markup(self, reply_markup: "objects.ReplyMarkup" = None):
         if self.text:
             return await self.edit_text(self.text, reply_markup)
         return await self.edit_caption(self.caption, reply_markup)
 
-    async def delete(
-            self
-    ):
+    async def delete(self):
         return await self.client.delete_message(self.chat.id, self.id)
 
-    async def forward(
-            self,
-            chat_id: Union[int, str]
-    ):
+    async def forward(self, chat_id: Union[int, str]):
         return await self.client.forward_message(chat_id, self.chat.id, self.id)
 
-    async def copy(
-            self,
-            chat_id: Union[int, str]
-    ):
+    async def copy(self, chat_id: Union[int, str]):
         return await self.client.copy_message(chat_id, self.chat.id, self.id)
 
     async def send(
-            self,
-            chat_id: Union[int, str],
-            reply_markup: "objects.ReplyMarkup" = None,
-            reply_to_message_id: int = None
+        self,
+        chat_id: Union[int, str],
+        reply_markup: "objects.ReplyMarkup" = None,
+        reply_to_message_id: int = None,
     ):
         if self.text:
             return await self.client.send_message(
-                chat_id,
-                self.text,
-                reply_markup,
-                reply_to_message_id
+                chat_id, self.text, reply_markup, reply_to_message_id
             )
         elif self.photo:
             return await self.client.send_photo(
@@ -291,7 +277,7 @@ class Message(Object):
                 self.photo[0].id,
                 self.caption,
                 reply_markup,
-                reply_to_message_id
+                reply_to_message_id,
             )
         elif self.voice:
             return await self.client.send_voice(
@@ -299,7 +285,7 @@ class Message(Object):
                 self.voice.id,
                 caption=self.caption,
                 reply_markup=reply_markup,
-                reply_to_message_id=reply_to_message_id
+                reply_to_message_id=reply_to_message_id,
             )
         elif self.audio:
             return await self.client.send_audio(
@@ -307,7 +293,7 @@ class Message(Object):
                 self.audio.id,
                 caption=self.caption,
                 reply_markup=reply_markup,
-                reply_to_message_id=reply_to_message_id
+                reply_to_message_id=reply_to_message_id,
             )
         elif self.video:
             return await self.client.send_video(
@@ -315,7 +301,7 @@ class Message(Object):
                 self.video.id,
                 caption=self.caption,
                 reply_markup=reply_markup,
-                reply_to_message_id=reply_to_message_id
+                reply_to_message_id=reply_to_message_id,
             )
         elif self.animation:
             return await self.client.send_animation(
@@ -323,7 +309,7 @@ class Message(Object):
                 self.animation.id,
                 caption=self.caption,
                 reply_markup=reply_markup,
-                reply_to_message_id=reply_to_message_id
+                reply_to_message_id=reply_to_message_id,
             )
         elif self.contact:
             return await self.client.send_contact(
@@ -332,7 +318,7 @@ class Message(Object):
                 self.contact.first_name,
                 self.contact.last_name,
                 reply_markup=reply_markup,
-                reply_to_message_id=reply_to_message_id
+                reply_to_message_id=reply_to_message_id,
             )
         elif self.location:
             return await self.client.send_location(
@@ -340,14 +326,14 @@ class Message(Object):
                 self.location.longitude,
                 self.location.latitude,
                 reply_markup=reply_markup,
-                reply_to_message_id=reply_to_message_id
+                reply_to_message_id=reply_to_message_id,
             )
         elif self.sticker:
             return await self.client.send_sticker(
                 chat_id,
                 self.sticker.id,
                 reply_markup=reply_markup,
-                reply_to_message_id=reply_to_message_id
+                reply_to_message_id=reply_to_message_id,
             )
         elif self.document:
             return await self.client.send_document(
@@ -355,6 +341,6 @@ class Message(Object):
                 self.document.id,
                 self.caption,
                 reply_markup,
-                reply_to_message_id
+                reply_to_message_id,
             )
         raise TypeError("Message is not copyable")

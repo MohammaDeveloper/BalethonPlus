@@ -18,12 +18,7 @@ class Dispatcher:
     reasonable_sync_workers = min(32, (cpu_count() or 1) + 4)
     reasonable_async_workers = reasonable_sync_workers * 5
 
-    def __init__(
-            self,
-            *clients,
-            async_workers: int = None,
-            sync_workers: int = None
-    ):
+    def __init__(self, *clients, async_workers: int = None, sync_workers: int = None):
         self.clients = clients
         try:
             self.event_loop = get_event_loop()
@@ -40,8 +35,13 @@ class Dispatcher:
         if self.is_started:
             raise RuntimeError("Dispatcher is already started")
         self.is_started = True
-        self.async_workers = [self.event_loop.create_task(self.worker()) for _ in range(self.async_workers_count)]
-        self.sync_workers = ThreadPoolExecutor(self.sync_workers_count, thread_name_prefix="Event Handler")
+        self.async_workers = [
+            self.event_loop.create_task(self.worker())
+            for _ in range(self.async_workers_count)
+        ]
+        self.sync_workers = ThreadPoolExecutor(
+            self.sync_workers_count, thread_name_prefix="Event Handler"
+        )
 
     async def stop(self):
         if not self.is_started:
@@ -62,7 +62,9 @@ class Dispatcher:
                 await self.propagate_chain(child, client, event)
                 break
             elif isinstance(child, EventHandler):
-                if not isinstance(event, child.can_handle) and not is_subclass(event, child.can_handle):
+                if not isinstance(event, child.can_handle) and not is_subclass(
+                    event, child.can_handle
+                ):
                     continue
                 try:
                     if not await child.check(client, event):

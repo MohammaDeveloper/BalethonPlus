@@ -48,7 +48,10 @@ class StateMachine:
         result = self.select_user_state(user_id)
         if result is None:
             return result
-        elif self.state_group is not None and result[0] in self.state_group.get_state_dict():
+        elif (
+            self.state_group is not None
+            and result[0] in self.state_group.get_state_dict()
+        ):
             return getattr(self.state_group, result[0])
         else:
             return result[0]
@@ -66,6 +69,7 @@ class StateMachine:
 
     def at(self, state: Union[State, str]):
         from ..conditions import at_state
+
         return at_state(state, self)
 
     def change_database(self, database: str = ":memory:"):

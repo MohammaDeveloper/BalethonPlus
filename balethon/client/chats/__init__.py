@@ -34,6 +34,6 @@ class Chats(
     SetChatPhoto,
     UnbanChatMember,
     UnpinAllChatMessages,
-    UnpinChatMessage
+    UnpinChatMessage,
 ):
     pass

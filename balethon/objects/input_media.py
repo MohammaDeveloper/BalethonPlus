@@ -5,13 +5,12 @@ from . import Object
 
 
 class InputMedia(Object):
-
     def __init__(
-            self,
-            type: str = None,
-            media: Union[str, bytes, BinaryIO] = None,
-            caption: str = None,
-            **kwargs
+        self,
+        type: str = None,
+        media: Union[str, bytes, BinaryIO] = None,
+        caption: str = None,
+        **kwargs,
     ):
         super().__init__(**kwargs)
         self.type: str = type

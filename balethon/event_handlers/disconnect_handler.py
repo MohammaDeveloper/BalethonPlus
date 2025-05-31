@@ -4,7 +4,6 @@ from .shutdown_handler import EventHandler
 
 
 class DisconnectHandler(EventHandler):
-
     @property
     def can_handle(self):
         return DisconnectHandler

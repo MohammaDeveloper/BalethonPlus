@@ -3,22 +3,20 @@ from balethon import objects
 
 
 class InviteLink(Object):
-    attribute_names = [
-        ("link", "invite_link")
-    ]
+    attribute_names = [("link", "invite_link")]
 
     def __init__(
-            self,
-            link: str = None,
-            creator: "objects.User" = None,
-            creates_join_request: bool = None,
-            is_primary: bool = None,
-            is_revoked: bool = None,
-            name: str = None,
-            expire_date: int = None,
-            member_limit: int = None,
-            pending_join_request_count: int = None,
-            **kwargs
+        self,
+        link: str = None,
+        creator: "objects.User" = None,
+        creates_join_request: bool = None,
+        is_primary: bool = None,
+        is_revoked: bool = None,
+        name: str = None,
+        expire_date: int = None,
+        member_limit: int = None,
+        pending_join_request_count: int = None,
+        **kwargs,
     ):
         super().__init__(**kwargs)
         self.link: str = link

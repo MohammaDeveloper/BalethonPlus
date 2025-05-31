@@ -4,7 +4,6 @@ from .chain import Chain
 
 
 class LoggingChain(Chain):
-
     def __init__(self, name="logging", condition=None, logger=None):
         super().__init__(name, condition)
         self.log = logger or getLogger(self.name)
@@ -21,7 +20,9 @@ class LoggingChain(Chain):
     def log_initialize(self, client):
         sync_workers = client.dispatcher.sync_workers_count
         async_workers = client.dispatcher.async_workers_count
-        self.log.info(f"{client} initialized (sync workers: {sync_workers} - async workers: {async_workers})")
+        self.log.info(
+            f"{client} initialized (sync workers: {sync_workers} - async workers: {async_workers})"
+        )
 
     @Chain.shutdown_handler()
     def log_shutdown(self, client):

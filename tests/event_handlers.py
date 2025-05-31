@@ -27,7 +27,6 @@ async def show_message(message):
 
 @bot.on_edited_message()
 async def show_edited_message(edited_message):
-
     print(f"EDITED MESSAGE - {edited_message.author.full_name}: {edited_message.text}")
 
 
@@ -38,7 +37,9 @@ async def show_callback_query(callback_query):
 
 @bot.on_pre_checkout_query()
 async def show_pre_checkout_query(pre_checkout_query):
-    print(f"PRE CHECKOUT QUERY - {pre_checkout_query.author.full_name}: {pre_checkout_query}")
+    print(
+        f"PRE CHECKOUT QUERY - {pre_checkout_query.author.full_name}: {pre_checkout_query}"
+    )
 
 
 @bot.on_shipping_query()

@@ -3,21 +3,19 @@ from balethon import objects
 
 
 class Update(Object):
-    attribute_names = [
-        ("id", "update_id")
-    ]
+    attribute_names = [("id", "update_id")]
 
     def __init__(
-            self,
-            id: int = None,
-            message: "objects.Message" = None,
-            edited_message: "objects.EditedMessage" = None,
-            channel_post: "objects.Message" = None,
-            edited_channel_post: "objects.EditedMessage" = None,
-            callback_query: "objects.CallbackQuery" = None,
-            shipping_query: "objects.ShippingQuery" = None,
-            pre_checkout_query: "objects.PreCheckoutQuery" = None,
-            **kwargs
+        self,
+        id: int = None,
+        message: "objects.Message" = None,
+        edited_message: "objects.EditedMessage" = None,
+        channel_post: "objects.Message" = None,
+        edited_channel_post: "objects.EditedMessage" = None,
+        callback_query: "objects.CallbackQuery" = None,
+        shipping_query: "objects.ShippingQuery" = None,
+        pre_checkout_query: "objects.PreCheckoutQuery" = None,
+        **kwargs,
     ):
         super().__init__(**kwargs)
         self.id: int = id

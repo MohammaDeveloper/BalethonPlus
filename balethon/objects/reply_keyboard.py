@@ -6,18 +6,15 @@ from balethon import objects
 
 
 class ReplyKeyboard(ReplyMarkup):
-    attribute_names = [
-        ("resize", "resize_keyboard"),
-        ("one_time", "one_time_keyboard")
-    ]
+    attribute_names = [("resize", "resize_keyboard"), ("one_time", "one_time_keyboard")]
 
     def __init__(
-            self,
-            *rows: List[Union["objects.ReplyKeyboardButton", str]],
-            resize: bool = None,
-            one_time: bool = None,
-            selective: bool = None,
-            **kwargs
+        self,
+        *rows: List[Union["objects.ReplyKeyboardButton", str]],
+        resize: bool = None,
+        one_time: bool = None,
+        selective: bool = None,
+        **kwargs,
     ):
         super().__init__(**kwargs)
         self.keyboard: List[List["objects.ReplyKeyboardButton"]] = BalethonList()
@@ -28,10 +25,10 @@ class ReplyKeyboard(ReplyMarkup):
         self.selective: bool = selective
 
     def add_button(
-            self,
-            button: Union["objects.ReplyKeyboardButton", str],
-            row_index: int = -1,
-            button_index: int = -1
+        self,
+        button: Union["objects.ReplyKeyboardButton", str],
+        row_index: int = -1,
+        button_index: int = -1,
     ):
         if isinstance(button, str):
             button = ReplyKeyboardButton(button)
@@ -42,7 +39,9 @@ class ReplyKeyboard(ReplyMarkup):
         else:
             self.keyboard[row_index].insert(button_index, button)
 
-    def add_row(self, *row: Union["objects.ReplyKeyboardButton", str], row_index: int = -1):
+    def add_row(
+        self, *row: Union["objects.ReplyKeyboardButton", str], row_index: int = -1
+    ):
         if row_index == -1:
             self.keyboard.append(BalethonList())
         elif row_index < 0:
@@ -54,4 +53,5 @@ class ReplyKeyboard(ReplyMarkup):
 
     def on_click(self, row_index: int, button_index: int):
         from ..conditions import click
+
         return click(self, row_index, button_index)

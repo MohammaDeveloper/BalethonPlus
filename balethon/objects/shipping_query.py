@@ -3,17 +3,15 @@ from balethon import objects
 
 
 class ShippingQuery(Object):
-    attribute_names = [
-        ("author", "from")
-    ]
+    attribute_names = [("author", "from")]
 
     def __init__(
-            self,
-            id: str = None,
-            author: "objects.User" = None,
-            invoice_payload: str = None,
-            shipping_address: "objects.ShippingAddress" = None,
-            **kwargs
+        self,
+        id: str = None,
+        author: "objects.User" = None,
+        invoice_payload: str = None,
+        shipping_address: "objects.ShippingAddress" = None,
+        **kwargs,
     ):
         super().__init__(**kwargs)
         self.id: str = id

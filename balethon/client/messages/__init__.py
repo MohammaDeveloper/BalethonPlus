@@ -6,5 +6,12 @@ from .delete_message import DeleteMessage
 from .copy_message import CopyMessage
 
 
-class Messages(SendMessage, EditMessageCaption, EditMessageText, ForwardMessage, DeleteMessage, CopyMessage):
+class Messages(
+    SendMessage,
+    EditMessageCaption,
+    EditMessageText,
+    ForwardMessage,
+    DeleteMessage,
+    CopyMessage,
+):
     pass

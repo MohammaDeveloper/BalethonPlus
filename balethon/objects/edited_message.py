@@ -3,20 +3,17 @@ from balethon import objects
 
 
 class EditedMessage(Object):
-    attribute_names = [
-        ("id", "message_id"),
-        ("author", "from")
-    ]
+    attribute_names = [("id", "message_id"), ("author", "from")]
 
     def __init__(
-            self,
-            id: int = None,
-            author: "objects.User" = None,
-            date: "objects.Date" = None,
-            chat: "objects.Chat" = None,
-            edit_date: "objects.Date" = None,
-            text: str = None,
-            **kwargs
+        self,
+        id: int = None,
+        author: "objects.User" = None,
+        date: "objects.Date" = None,
+        chat: "objects.Chat" = None,
+        edit_date: "objects.Date" = None,
+        text: str = None,
+        **kwargs,
     ):
         super().__init__(**kwargs)
         self.id: int = id

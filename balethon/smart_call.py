@@ -10,7 +10,10 @@ def remove_unwanted_positional_parameters(function, *args):
     positional_arguments = []
 
     for i, parameter in enumerate(signature(function).parameters.values()):
-        if parameter.kind in (parameter.POSITIONAL_OR_KEYWORD, parameter.POSITIONAL_ONLY):
+        if parameter.kind in (
+            parameter.POSITIONAL_OR_KEYWORD,
+            parameter.POSITIONAL_ONLY,
+        ):
             try:
                 positional_arguments.append(args[i])
             except IndexError:

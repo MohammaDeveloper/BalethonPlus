@@ -2,13 +2,12 @@ from . import Object
 
 
 class WebhookInfo(Object):
-
     def __init__(
-            self,
-            url: str,
-            has_custom_certificate: bool,
-            pending_update_count: int,
-            **kwargs
+        self,
+        url: str,
+        has_custom_certificate: bool,
+        pending_update_count: int,
+        **kwargs,
     ):
         super().__init__(**kwargs)
         self.url: str = url

@@ -6,22 +6,23 @@ from balethon import objects
 
 
 class InlineKeyboard(ReplyMarkup):
-
     def __init__(
-            self,
-            *rows: List[Union["objects.InlineKeyboardButton", Tuple[str, str]]],
-            **kwargs
+        self,
+        *rows: List[Union["objects.InlineKeyboardButton", Tuple[str, str]]],
+        **kwargs,
     ):
         super().__init__(**kwargs)
-        self.inline_keyboard: List[List["objects.InlineKeyboardButton"]] = BalethonList()
+        self.inline_keyboard: List[List["objects.InlineKeyboardButton"]] = (
+            BalethonList()
+        )
         for row in rows:
             self.add_row(*row)
 
     def add_button(
-            self,
-            button: Union["objects.InlineKeyboardButton", Tuple[str, str]],
-            row_index: int = -1,
-            button_index: int = -1
+        self,
+        button: Union["objects.InlineKeyboardButton", Tuple[str, str]],
+        row_index: int = -1,
+        button_index: int = -1,
     ):
         if isinstance(button, tuple):
             button = InlineKeyboardButton(*button)
@@ -32,7 +33,11 @@ class InlineKeyboard(ReplyMarkup):
         else:
             self.inline_keyboard[row_index].insert(button_index, button)
 
-    def add_row(self, *row: Union["objects.InlineKeyboardButton", Tuple[str, str]], row_index: int = -1):
+    def add_row(
+        self,
+        *row: Union["objects.InlineKeyboardButton", Tuple[str, str]],
+        row_index: int = -1,
+    ):
         if row_index == -1:
             self.inline_keyboard.append(BalethonList())
         elif row_index < 0:
@@ -44,4 +49,5 @@ class InlineKeyboard(ReplyMarkup):
 
     def on_click(self, row_index: int, button_index: int):
         from ..conditions import click
+
         return click(self, row_index, button_index)

@@ -4,7 +4,6 @@ from .initialize_handler import EventHandler
 
 
 class ConnectHandler(EventHandler):
-
     @property
     def can_handle(self):
         return ConnectHandler
@@ -16,4 +15,3 @@ class ConnectHandler(EventHandler):
         if client is not None:
             kwargs["client"] = client
         await super().handle(*args, **kwargs, time=datetime.now())
-

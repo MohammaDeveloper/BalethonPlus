@@ -2,7 +2,6 @@ from . import ReplyKeyboard
 
 
 class ReplyKeyboardRemove(ReplyKeyboard):
-
     def __init__(self):
         super().__init__([])
 

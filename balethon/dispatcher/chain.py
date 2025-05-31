@@ -11,12 +11,11 @@ from ..event_handlers import (
     PreCheckoutQueryHandler,
     ShippingQueryHandler,
     ShutdownHandler,
-    DisconnectHandler
+    DisconnectHandler,
 )
 
 
 class Chain:
-
     def __init__(self, name, condition=None, *chains):
         self.name = name
         self.condition = condition
@@ -37,14 +36,17 @@ class Chain:
     def create_event_handler(event_handler, *args, **kwargs):
         def decorator(callback):
             return event_handler(callback, *args, **kwargs)
+
         return decorator
 
     def add_event_handler(self, event_handler, *args, **kwargs):
         if isinstance(event_handler, type):
+
             def decorator(callback):
                 event_handler_instance = event_handler(callback, *args, **kwargs)
                 self.add_event_handler(event_handler_instance)
                 return event_handler_instance
+
             return decorator
         self.children.append(event_handler)
 
@@ -98,11 +100,29 @@ class Chain:
         return self.add_event_handler(EditedMessageHandler, condition)
 
     @classmethod
-    def command_handler(cls, condition=None, name=None, prefix="/", min_arguments=None, max_arguments=None):
-        return cls.create_event_handler(CommandHandler, condition, name, prefix, min_arguments, max_arguments)
+    def command_handler(
+        cls,
+        condition=None,
+        name=None,
+        prefix="/",
+        min_arguments=None,
+        max_arguments=None,
+    ):
+        return cls.create_event_handler(
+            CommandHandler, condition, name, prefix, min_arguments, max_arguments
+        )
 
-    def on_command(self, condition=None, name=None, prefix="/", min_arguments=None, max_arguments=None):
-        return self.add_event_handler(CommandHandler, condition, name, prefix, min_arguments, max_arguments)
+    def on_command(
+        self,
+        condition=None,
+        name=None,
+        prefix="/",
+        min_arguments=None,
+        max_arguments=None,
+    ):
+        return self.add_event_handler(
+            CommandHandler, condition, name, prefix, min_arguments, max_arguments
+        )
 
     @classmethod
     def callback_query_handler(cls, condition=None):
@@ -152,7 +172,7 @@ class Chain:
         for chain in self.chains:
             if chain.name == name:
                 return chain
-        raise ValueError(f"Chain \"{name}\" does not exist")
+        raise ValueError(f'Chain "{name}" does not exist')
 
     def delete(self, name):
         for i, c in enumerate(self.chains):
@@ -163,4 +183,4 @@ class Chain:
             if isinstance(c, Chain) and c.name == name:
                 del self.children[i]
                 return
-        raise ValueError(f"Chain \"{name}\" does not exist")
+        raise ValueError(f'Chain "{name}" does not exist')

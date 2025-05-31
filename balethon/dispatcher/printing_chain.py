@@ -4,7 +4,6 @@ from .chain import Chain
 
 
 class PrintingChain(Chain):
-
     def __init__(self, name="printing", condition=None):
         super().__init__(name, condition)
 

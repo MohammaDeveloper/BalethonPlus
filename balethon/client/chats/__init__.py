@@ -1,3 +1,4 @@
+from .answer_callback_query import AnswerCallbackQuery
 from .ban_chat_member import BanChatMember
 from .delete_chat_photo import DeleteChatPhoto
 from .get_chat import GetChat
@@ -18,6 +19,7 @@ from .unpin_chat_message import UnpinChatMessage
 
 
 class Chats(
+    AnswerCallbackQuery,
     BanChatMember,
     DeleteChatPhoto,
     GetChat,

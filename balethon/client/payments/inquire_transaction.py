@@ -1,5 +1,4 @@
 import balethon
-
 from ...objects import Transaction
 
 

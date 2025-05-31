@@ -14,7 +14,6 @@ from .chats import Chats
 from .invite_links import InviteLinks
 from .payments import Payments
 from .stickers import Stickers
-from .alerts import Alerts
 from ..objects import Object, wrap, unwrap, Chat, User
 from ..errors import TooManyRequestsError
 from ..network import Connection
@@ -40,7 +39,6 @@ class Client(
     InviteLinks,
     Payments,
     Stickers,
-    Alerts,
 ):
     def __init__(
         self,
@@ -57,7 +55,8 @@ class Client(
         self.dispatcher = Dispatcher(
             self, async_workers=async_workers, sync_workers=sync_workers
         )
-        self.connection = Connection(token, time_out, proxy, base_url, short_url)
+        self.connection = Connection(
+            token, time_out, proxy, base_url, short_url)
         self.sleep_threshold = sleep_threshold
         self.user = None
         self.is_disconnected = False
@@ -192,11 +191,13 @@ class Client(
                 loop = get_event_loop()
                 loop.run_until_complete(function)
             elif iscoroutinefunction(function):
-                kwargs = remove_unwanted_keyword_parameters(function, client=self)
+                kwargs = remove_unwanted_keyword_parameters(
+                    function, client=self)
                 loop = get_event_loop()
                 loop.run_until_complete(function(**kwargs))
             else:
-                kwargs = remove_unwanted_keyword_parameters(function, client=self)
+                kwargs = remove_unwanted_keyword_parameters(
+                    function, client=self)
                 function(**kwargs)
         except KeyboardInterrupt:
             return

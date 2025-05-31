@@ -1,7 +1,7 @@
-from .send_invoice import SendInvoice
-from .inquire_transaction import InquireTransaction
 from .answer_pre_checkout_query import AnswerPreCheckoutQuery
+from .inquire_transaction import InquireTransaction
+from .send_invoice import SendInvoice
 
 
-class Payments(SendInvoice, InquireTransaction, AnswerPreCheckoutQuery):
+class Payments(AnswerPreCheckoutQuery, InquireTransaction, SendInvoice):
     pass

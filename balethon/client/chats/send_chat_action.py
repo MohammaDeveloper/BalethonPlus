@@ -12,6 +12,4 @@ class SendChatAction:
         chat_id = str(
             chat_id
         )  # The sendChatAction method only works with a string chat_id
-        return await self.execute(
-            "post", "sendChatAction", chat_id=chat_id, action=action.name.lower()
-        )
+        return await self.auto_execute("post", "sendChatAction", locals())

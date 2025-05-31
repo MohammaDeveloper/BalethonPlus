@@ -1,14 +1,17 @@
 from typing import Union
 
 import balethon
+from balethon import enums
 
 
 class SendChatAction:
     async def send_chat_action(
-        self: "balethon.Client", chat_id: Union[int, str], action: str = "typing"
+        self: "balethon.Client", chat_id: Union[int, str], action: "enums.ChatAction"
     ) -> bool:
         chat_id = await self.resolve_peer_id(chat_id)
         chat_id = str(
             chat_id
         )  # The sendChatAction method only works with a string chat_id
-        return await self.auto_execute("post", "sendChatAction", locals())
+        return await self.execute(
+            "post", "sendChatAction", chat_id=chat_id, action=action.name.lower()
+        )

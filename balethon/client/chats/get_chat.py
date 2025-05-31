@@ -22,6 +22,7 @@ class GetChat:
             if info.type == "private":
                 result.type = ChatType.PRIVATE
                 result.first_name = info.first_name
+                result.bind(self)
                 return result
             
             result.title = info.title
@@ -29,6 +30,7 @@ class GetChat:
                 result.type = ChatType.GROUP
             if info.type == "channel":
                 result.type = ChatType.CHANNEL
+            result.bind(self)
             return result
 
         # "@username"

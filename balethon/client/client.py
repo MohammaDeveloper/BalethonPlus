@@ -11,7 +11,6 @@ from .updates import Updates
 from .users import Users
 from .attachments import Attachments
 from .chats import Chats
-from ..enums import ChatAction
 from .invite_links import InviteLinks
 from .payments import Payments
 from .stickers import Stickers
@@ -101,13 +100,10 @@ class Client(
         data = {k: v for k, v in data.items() if v is not None}
         files = {}
         if json is None:
-            for key, value in data.items():
+            for value in data.values():
                 if isinstance(value, (bytes, BufferedReader, BytesIO)):
                     json = False
-                    break
-                elif isinstance(value, ChatAction):
-                    data[key] = value.name.lower()   
-                    break             
+                    break          
             else:
                 json = True
         for key, value in data.items():

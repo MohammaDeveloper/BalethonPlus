@@ -27,5 +27,5 @@ class CallbackQuery(Object):
         self.data: str = data
         self.game_short_name: str = game_short_name
 
-    async def answer(self, text: str = None, show_alert: bool = None) -> bool:
+    async def answer(self, text: str, show_alert: bool = False) -> bool:
         return await self.client.asnwer_callback_query(self.id, text, show_alert)

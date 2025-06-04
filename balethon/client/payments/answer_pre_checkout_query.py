@@ -8,4 +8,6 @@ class AnswerPreCheckoutQuery:
         ok: bool = True,
         error_message: str = None,
     ) -> bool:
+        if ok is False and error_message is None:
+            error_message = "لطفاً بعدا دوباره تلاش کنید."
         return await self.auto_execute("post", "answerPreCheckoutQuery", locals())

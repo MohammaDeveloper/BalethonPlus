@@ -4,9 +4,10 @@ from .name_enum import NameEnum
 
 
 class TransactionStatus(NameEnum):
-    PENDING = auto()
-    SUCCEED = auto()
     FAILED = auto()
+    PENDING = auto()
+    PAID = auto()
     REJECTED = auto()
+    SUCCEED = auto()
     TIMEOUTE = auto()
     

@@ -9,5 +9,5 @@ class TransactionStatus(NameEnum):
     PAID = auto()
     REJECTED = auto()
     SUCCEED = auto()
-    TIMEOUTE = auto()
+    TIMEOUT = auto()
     

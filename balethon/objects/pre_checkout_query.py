@@ -1,4 +1,4 @@
-from . import Object
+from . import Object, Transaction
 from balethon import objects
 from ..sync_support import add_sync_support_to_object
 
@@ -30,5 +30,5 @@ class PreCheckoutQuery(Object):
     async def answer(self, ok: bool = True, error_message: str = None) -> bool:
         return await self.client.answer_pre_checkout_query(self.id, ok, error_message)
 
-    async def inquire(self) -> "objects.Transaction":
+    async def inquire(self) -> Transaction:
         return await self.client.inquire_transaction(self.id)

@@ -1,4 +1,4 @@
-from . import Object
+from . import Object, Transaction
 from balethon import objects
 
 
@@ -23,5 +23,5 @@ class SuccessfulPayment(Object):
         self.telegram_payment_charge_id: str = telegram_payment_charge_id
         self.provider_payment_charge_id: str = provider_payment_charge_id
 
-    async def inquire(self) -> "objects.Transaction":
+    async def inquire(self) -> Transaction:
         return await self.client.inquire_transaction(self.telegram_payment_charge_id)

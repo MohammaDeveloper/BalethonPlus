@@ -2,7 +2,7 @@ import balethon
 
 
 class AnswerCallbackQuery:
-    async def asnwer_callback_query(
+    async def answer_callback_query(
         self: "balethon.Client",
         callback_query_id: str,
         text: str,

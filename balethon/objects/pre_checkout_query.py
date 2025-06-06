@@ -1,5 +1,5 @@
-from . import Object, Transaction
 from balethon import objects
+from . import Object, Transaction
 from ..sync_support import add_sync_support_to_object
 
 

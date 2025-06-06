@@ -1,3 +1,4 @@
+from balethon import enums
 from . import Object
 
 
@@ -18,7 +19,7 @@ class Transaction(Object):
     ):
         super().__init__(**kwargs)
         self.id: str = id
-        self.status: str = status
+        self.status: "enums.TransactionStatus" = enums.TransactionStatus(status)
         self.user_id: int = user_id
         self.amount: int = amount
         self.created_at = created_at

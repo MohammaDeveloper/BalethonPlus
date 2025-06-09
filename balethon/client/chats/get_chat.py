@@ -8,11 +8,34 @@ from ...enums import ChatType
 
 class GetChat:
     async def get_chat(self: "balethon.Client", chat_id: Union[int, str]) -> Chat:
+        result = Chat()
+
         # 1234567890 | "1234567890"
         if isinstance(chat_id, int) or (
             isinstance(chat_id, str) and chat_id.isnumeric()
         ):
-            return Chat(await self.auto_execute("get", "getChat", locals()))
+            info = await self.auto_execute("get", "getChat", locals())
+
+            result.id = info.id
+            result.username = info.username
+            result.description = info.description
+
+            if info.type == "private":
+                result.type = ChatType.PRIVATE
+                result.first_name = info.first_name     
+                result.bind(self)
+                return result
+
+            result.title = info.title
+
+            if info.type == "group":
+                result.type = ChatType.GROUP
+
+            elif info.type == "channel":
+                result.type = ChatType.CHANNEL
+
+            result.bind(self)    
+            return result
 
         # "@username"
         if chat_id.startswith("@"):
@@ -29,8 +52,6 @@ class GetChat:
         # "ble.ir/join/ABCDEEFGHI" | "ble.ir/username"
         elif chat_id.startswith("ble.ir/"):
             chat_id = chat_id.replace("ble.ir/", "")
-
-        result = Chat()
 
         info = await self.connection.get_peer_info(chat_id)
 

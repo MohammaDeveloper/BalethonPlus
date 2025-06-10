@@ -39,7 +39,7 @@ bot.run()
 ## Installing
 
 ```bash
-pip install Balethon
+pip install BalethonPlus
 ```
 
 ## Links

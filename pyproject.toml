@@ -4,13 +4,14 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "BalethonPlus"
-version = "1.0.2"
+version = "1.0.3"
 description = "A library for creating bots in the Bale messenger"
 readme = "README.md"
 license = {file = "LICENSE"}
 authors = [
   {name = "Sajjad", email = "sajjadalipour2006@gmail.com"},
-  {name = "Abolfazl Amiri", email = "soltshen@gmail.com"}
+  {name = "Abolfazl Amiri", email = "soltshen@gmail.com"},
+  {name = "Mohammad Vatankhah", email = "vatankhahmohammad19384@gmail.com"}
 ]
 keywords = ["bale", "messenger", "bot", "api", "client"]
 classifiers = [
@@ -19,8 +20,7 @@ classifiers = [
 dependencies = ["httpx==0.28.1", "markupever==0.3.1"]
 
 [project.urls]
-"Homepage" = "https://github.com/Balethon/Balethon"
-"Download" = "https://github.com/Balethon/Balethon/releases/latest"
-"Documentation" = "https://balethon.ir"
-"Tracker" = "https://github.com/Balethon/Balethon/issues"
-"Community" = "https://ble.ir/join/MTlhN2Q2Mz"
+"Homepage" = "https://github.com/MohammaDeveloper/BalethonPlus"
+"Download" = "https://github.com/MohammaDeveloper/BalethonPlus/releases/latest"
+"Tracker" = "https://github.com/MohammaDeveloper/BalethonPlus/issues"
+"Community" = "https://ble.ir/balethon_plus_group"

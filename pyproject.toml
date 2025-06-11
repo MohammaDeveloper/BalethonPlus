@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "BalethonPlus"
-version = "1.0.5"
+version = "1.1.0"
 description = "A library for creating bots in the Bale messenger"
 readme = "README.md"
 license = {file = "LICENSE"}
@@ -23,4 +23,4 @@ dependencies = ["httpx==0.28.1", "markupever==0.3.1"]
 "Homepage" = "https://github.com/MohammaDeveloper/BalethonPlus"
 "Download" = "https://github.com/MohammaDeveloper/BalethonPlus/releases/latest"
 "Tracker" = "https://github.com/MohammaDeveloper/BalethonPlus/issues"
-"Community" = "https://ble.ir/balethon_plus_group"
+"Community" = "https://ble.ir/balethon_group"

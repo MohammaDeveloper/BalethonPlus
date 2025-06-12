@@ -1,2 +1,1 @@
 httpx==0.28.1
-markupever==0.3.1

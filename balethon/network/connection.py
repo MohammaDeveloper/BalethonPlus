@@ -1,7 +1,7 @@
 from json import loads
 from logging import getLogger
-from re import search
 
+from re import search
 from httpx import AsyncClient
 from httpx._types import ProxyTypes
 

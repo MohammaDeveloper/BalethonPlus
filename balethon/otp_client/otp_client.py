@@ -29,6 +29,10 @@ class OTPClient:
         self.client = None
         self.is_started = False
 
+    def __repr__(self):
+        client_name = type(self).__name__
+        return f"{client_name}({self.id})"
+
     async def connect(self):
         if self.is_started:
             raise ConnectionError("Connection is already started")

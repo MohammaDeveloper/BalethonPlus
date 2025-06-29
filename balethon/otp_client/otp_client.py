@@ -117,6 +117,7 @@ class OTPClient:
             raise RPCError.create(
                 response.status_code,
                 description.capitalize() if description else description,
+                "send_otp"
             )
         return response_json.get("balance")
 

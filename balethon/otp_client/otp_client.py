@@ -85,6 +85,7 @@ class OTPClient:
                 "client_id": self.id,
             },
         )
+
         status_code = response.status_code
         if status_code != 200:
             if status_code == 400:
@@ -94,9 +95,11 @@ class OTPClient:
             elif status_code == 500:
                 description = "Internal server error occurred"
             raise RPCError.create(status_code, description)
+
         response_json = response.json()
-        self.last_access_token = response_json["access_token"]
         self.expires_time_last_access_token = current_time + response_json["expires_in"]
+        self.last_access_token = response_json["access_token"]
+        
         return self.last_access_token
 
     async def send_otp(self, phone: str, otp: int):
@@ -111,14 +114,16 @@ class OTPClient:
                 for k, v in zip(list(locals().keys())[1:], list(locals().values())[1:])
             },
         )
+
         response_json = response.json()
         if response.status_code != 200:
             description = response_json.get("message")
             raise RPCError.create(
                 response.status_code,
                 description.capitalize() if description else description,
-                "send_otp"
+                "send_otp",
             )
+        
         return response_json.get("balance")
 
     def passcode_generate(self, number_of_digits: int = 5) -> int:

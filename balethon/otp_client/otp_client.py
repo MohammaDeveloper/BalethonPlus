@@ -126,5 +126,6 @@ class OTPClient:
         
         return response_json.get("balance")
 
-    def passcode_generate(self, number_of_digits: int = 5) -> int:
+    @staticmethod
+    def passcode_generate(number_of_digits: int = 5) -> int:
         return int("".join([str(randint(1, 9)) for _ in range(number_of_digits)]))

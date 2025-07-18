@@ -9,6 +9,8 @@ from ..sync_support import add_sync_support_to_object
 class Chat(Object):
     def __init__(
         self,
+        accent_color_id: int = None,
+        max_reaction_count: int = None,
         id: int = None,
         type: str = None,
         title: str = None,
@@ -16,7 +18,7 @@ class Chat(Object):
         first_name: str = None,
         last_name: str = None,
         all_members_are_administrators: bool = None,
-        description: str = None,
+        bio: str = None,
         invite_link: str = None,
         pinned_message: "objects.Message" = None,
         sticker_set_name: str = None,
@@ -25,6 +27,8 @@ class Chat(Object):
         **kwargs,
     ):
         super().__init__(**kwargs)
+        self.accent_color_id: int = accent_color_id
+        self.max_reaction_count: int = max_reaction_count
         self.id: int = id
         self.type: "enums.ChatType" = type
         self.title: str = title
@@ -32,7 +36,7 @@ class Chat(Object):
         self.first_name: str = first_name
         self.last_name: str = last_name
         self.all_members_are_administrators: bool = all_members_are_administrators
-        self.description: str = description
+        self.bio: str = bio
         self.invite_link: str = invite_link
         self.pinned_message: "objects.Message" = pinned_message
         self.sticker_set_name: str = sticker_set_name

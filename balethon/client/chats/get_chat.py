@@ -16,9 +16,12 @@ class GetChat:
         ):
             info = await self.auto_execute("get", "getChat", locals())
 
+            result.accent_color_id = info.accent_color_id,
+            result.max_reaction_count = info.max_reaction_count,
             result.id = info.id
             result.username = info.username
-            result.description = info.description
+            result.bio = info.bio
+            result.photo = info.photo
 
             if info.type == "private":
                 result.type = ChatType.PRIVATE

@@ -19,6 +19,7 @@ class Chat(Object):
         last_name: str = None,
         all_members_are_administrators: bool = None,
         bio: str = None,
+        description: str = None,
         invite_link: str = None,
         pinned_message: "objects.Message" = None,
         sticker_set_name: str = None,
@@ -30,13 +31,14 @@ class Chat(Object):
         self.accent_color_id: int = accent_color_id
         self.max_reaction_count: int = max_reaction_count
         self.id: int = id
-        self.type: "enums.ChatType" = type
+        self.type: "enums.ChatType" = enums.ChatType(type)
         self.title: str = title
         self.username: str = username
         self.first_name: str = first_name
         self.last_name: str = last_name
         self.all_members_are_administrators: bool = all_members_are_administrators
         self.bio: str = bio
+        self.description: str = description
         self.invite_link: str = invite_link
         self.pinned_message: "objects.Message" = pinned_message
         self.sticker_set_name: str = sticker_set_name

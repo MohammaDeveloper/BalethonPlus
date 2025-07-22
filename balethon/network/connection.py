@@ -53,11 +53,12 @@ class Connection:
     async def get_peer_info(self, query: str):
         response = await self.client.get(f"{self.short_url}/{query}")
         json_info = search(
+            r'(<script id="__NEXT_DATA__" type="application/json">.*</script>)',
+            response.text,
+        )[0]
+        json_info = search(
             r"({.*})",
-            search(
-                r'(<script id="__NEXT_DATA__" type="application/json">.*</script>)',
-                response.text,
-            )[0],
+            json_info,
         )[0]
         return loads(json_info)
 

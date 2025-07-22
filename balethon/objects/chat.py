@@ -27,7 +27,7 @@ class Chat(Object):
     ):
         super().__init__(**kwargs)
         self.id: int = id
-        self.type: "enums.ChatType" = enums.ChatType(type)
+        self.type: "enums.ChatType" = enums.ChatType(type) if type else None
         self.title: str = title
         self.username: str = username
         self.first_name: str = first_name

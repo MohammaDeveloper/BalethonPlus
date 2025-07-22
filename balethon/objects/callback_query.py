@@ -27,5 +27,9 @@ class CallbackQuery(Object):
         self.data: str = data
         self.game_short_name: str = game_short_name
 
+    @property
+    def answer_supported(self) -> bool:
+        return not self.id.startswith("1")
+
     async def answer(self, text: str, show_alert: bool = False) -> bool:
         return await self.client.answer_callback_query(self.id, text, show_alert)

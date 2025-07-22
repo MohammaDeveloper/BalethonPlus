@@ -63,6 +63,9 @@ class Object:
     def __init__(self, **kwargs):
         self.client: Optional["balethon.Client"] = None
         for key, value in kwargs.items():
+            if key in ("accent_color_id", "max_reaction_count", "accepted_gift_types"):
+                continue
+
             self[key] = value
 
     def unwrap(self):

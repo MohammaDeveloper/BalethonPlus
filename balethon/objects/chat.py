@@ -9,8 +9,6 @@ from ..sync_support import add_sync_support_to_object
 class Chat(Object):
     def __init__(
         self,
-        accent_color_id: int = None,
-        max_reaction_count: int = None,
         id: int = None,
         type: str = None,
         title: str = None,
@@ -28,8 +26,6 @@ class Chat(Object):
         **kwargs,
     ):
         super().__init__(**kwargs)
-        self.accent_color_id: int = accent_color_id
-        self.max_reaction_count: int = max_reaction_count
         self.id: int = id
         self.type: "enums.ChatType" = enums.ChatType(type)
         self.title: str = title

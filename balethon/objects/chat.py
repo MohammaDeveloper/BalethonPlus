@@ -23,6 +23,7 @@ class Chat(Object):
         sticker_set_name: str = None,
         can_set_sticker_set: bool = None,
         photo: "objects.ChatPhoto" = None,
+        linked_chat_id: str = None,
         **kwargs,
     ):
         super().__init__(**kwargs)
@@ -40,6 +41,7 @@ class Chat(Object):
         self.sticker_set_name: str = sticker_set_name
         self.can_set_sticker_set: bool = can_set_sticker_set
         self.photo: "objects.ChatPhoto" = photo
+        self.linked_chat_id: str = linked_chat_id
 
     def __eq__(self, other):
         return self.id == other.id
